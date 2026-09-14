@@ -1,0 +1,3 @@
+/* Intentionally minimal: interaction motion is driven by Framer Motion.
+   This file only contains non-semantic ambient fallback keyframes. */
+@keyframes grid-shift { to { background-position: 48px 48px; } }
