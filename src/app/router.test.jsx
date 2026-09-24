@@ -4,7 +4,10 @@ import AppShell from './AppShell'
 
 function TestPage() { return <h1>Route works</h1> }
 
-test('AppShell renders route content', () => {
+test('AppShell renders route content and resets scroll position', () => {
+  const scrollToSpy = vi.fn()
+  window.scrollTo = scrollToSpy
+
   render(
     <MemoryRouter initialEntries={['/test']}>
       <Routes>
@@ -16,4 +19,5 @@ test('AppShell renders route content', () => {
   )
   expect(screen.getAllByText('FIVEWAYS').length).toBeGreaterThan(0)
   expect(screen.getByRole('heading', { name: 'Route works' })).toBeInTheDocument()
+  expect(scrollToSpy).toHaveBeenCalledWith({ top: 0, left: 0, behavior: 'auto' })
 })

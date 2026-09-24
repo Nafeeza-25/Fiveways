@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { Outlet, useLocation } from 'react-router-dom'
 import TopNav from '../components/TopNav'
@@ -5,6 +6,15 @@ import TopNav from '../components/TopNav'
 export default function AppShell() {
   const location = useLocation()
   const reduce = useReducedMotion()
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'auto',
+    })
+  }, [location.pathname])
+
   return (
     <div className="min-h-screen bg-[#050816]">
       <TopNav />
