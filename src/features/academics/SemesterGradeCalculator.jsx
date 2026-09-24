@@ -18,7 +18,20 @@ export default function SemesterGradeCalculator() {
   const semesterOptions = getSemesters(regulation, department)
   const [semester, setSemester] = useState(semesterOptions[0] ?? '')
   const [gradesByCode, setGradesByCode] = useState({})
-  const [savedSemesters, setSavedSemesters] = useLocalStorage('fiveways-academic-semesters', [])
+  const [storedSemesters, setStoredSemesters] = useLocalStorage('fiveways-academic-semesters', [])
+
+  useEffect(() => {
+    if (!Array.isArray(storedSemesters)) {
+      setStoredSemesters([])
+    }
+  }, [storedSemesters, setStoredSemesters])
+
+  const savedSemesters = useMemo(() => {
+    if (!Array.isArray(storedSemesters)) return []
+    return storedSemesters.filter(
+      (item) => item && typeof item === 'object' && !Array.isArray(item) && item.regulation && item.department && item.semester != null
+    )
+  }, [storedSemesters])
 
   const courses = getCourses(regulation, department, semester)
   const currentResult = useMemo(() => calculateSemesterResult({ courses, gradesByCode }), [courses, gradesByCode])
@@ -33,7 +46,7 @@ export default function SemesterGradeCalculator() {
   function changeRegulation(nextRegulation) { const departments = getDepartments(nextRegulation); const nextDepartment = departments[0]?.code ?? ''; const semesters = getSemesters(nextRegulation, nextDepartment); setRegulation(nextRegulation); setDepartment(nextDepartment); setSemester(semesters[0] ?? '') }
   function changeDepartment(nextDepartment) { const semesters = getSemesters(regulation, nextDepartment); setDepartment(nextDepartment); setSemester(semesters[0] ?? '') }
   function updateGrade(code, grade) { setGradesByCode((current) => ({ ...current, [code]: grade })) }
-  function saveSemester() { if (!currentResult) return; const next = { regulation, department, semester: Number(semester), gradesByCode, ...currentResult, savedAt: new Date().toISOString() }; setSavedSemesters((current) => upsertSemesterResult(current, next)) }
+  function saveSemester() { if (!currentResult) return; const next = { regulation, department, semester: Number(semester), gradesByCode, ...currentResult, savedAt: new Date().toISOString() }; setStoredSemesters((current) => upsertSemesterResult(current, next)) }
 
   const requiredCourses = courses.filter((course) => Number(course.credits) > 0)
   const completedGrades = requiredCourses.filter((course) => gradesByCode[course.code]).length

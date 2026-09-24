@@ -87,7 +87,9 @@ export function calculateCgpa(semesterResults) {
 }
 
 export function upsertSemesterResult(savedResults, nextResult) {
-  const items = Array.isArray(savedResults) ? savedResults : []
+  const items = Array.isArray(savedResults)
+    ? savedResults.filter((item) => item && typeof item === 'object' && !Array.isArray(item) && item.regulation && item.department && item.semester != null)
+    : []
   const keyMatches = (item) => (
     item.regulation === nextResult.regulation
     && item.department === nextResult.department
