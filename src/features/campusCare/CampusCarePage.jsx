@@ -11,7 +11,7 @@ const stages = ['Submitted', 'Assigned', 'In Progress', 'Resolved']
 
 export default function CampusCarePage() {
   const [ticket, setTicket] = useLocalStorage('fiveways-campus-ticket', null)
-  function createTicket(input) { setTicket(createDemoTicket(input, 2048)) }
+  function createTicket(input) { setTicket(createDemoTicket(input)) }
   function advanceTicket() { setTicket((current) => { if (!current) return current; const index = stages.indexOf(current.status); return { ...current, status: stages[Math.min(index + 1, stages.length - 1)] } }) }
 
   return (

@@ -1,4 +1,7 @@
-function validNumber(value, min = 0, max = 10) {
+export function validNumber(value, min = 0, max = 10) {
+  if (value === null || value === undefined || (typeof value === 'string' && value.trim() === '')) {
+    return null
+  }
   const number = Number(value)
   return Number.isFinite(number) && number >= min && number <= max ? number : null
 }

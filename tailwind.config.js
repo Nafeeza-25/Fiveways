@@ -16,6 +16,7 @@ export default {
       boxShadow: {
         glow: '0 0 80px rgba(99, 102, 241, .28)',
         float: '0 24px 80px rgba(15, 23, 42, .14)',
+        'soft-xl': '0 20px 50px -12px rgba(15, 23, 42, 0.08)',
       },
       borderRadius: {
         '4xl': '2rem',

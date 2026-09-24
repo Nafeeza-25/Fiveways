@@ -21,7 +21,7 @@ export default function AppShell() {
       </AnimatePresence>
       <footer className="border-t border-white/10 bg-[#050816] text-white">
         <div className="mx-auto flex max-w-7xl flex-col gap-4 px-5 py-8 text-xs text-white/40 sm:flex-row sm:items-center sm:justify-between sm:px-8 lg:px-10">
-          <strong className="tracking-[.16em] text-white/[.8]0">FIVEWAYS</strong>
+          <strong className="tracking-[.16em] text-white/80">FIVEWAYS</strong>
           <span>Five student problems · five clear next actions · competition prototype</span>
         </div>
       </footer>

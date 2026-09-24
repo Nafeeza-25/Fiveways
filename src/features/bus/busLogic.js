@@ -5,7 +5,18 @@ export function getAvailableStops(buses) {
 export function getBusesForStop(buses, stopName) {
   const normalized = String(stopName ?? '').trim().toLowerCase()
   if (!normalized) return []
-  return buses.filter((bus) => bus.stops.some((stop) => stop.toLowerCase() === normalized))
+  return buses
+    .filter((bus) => bus.stops.some((stop) => stop.toLowerCase() === normalized))
+    .map((bus) => {
+      const matchedStop = bus.stops.find((stop) => stop.toLowerCase() === normalized)
+      const stopData = bus.stopStates ? bus.stopStates[matchedStop] : null
+      return {
+        ...bus,
+        selectedStop: matchedStop ?? stopName,
+        etaMinutes: stopData ? stopData.etaMinutes : (bus.etaMinutes ?? 0),
+        status: stopData ? stopData.status : (bus.status ?? 'upcoming'),
+      }
+    })
 }
 
 export function recommendBus(busesForStop) {

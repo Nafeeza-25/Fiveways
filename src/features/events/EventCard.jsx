@@ -21,7 +21,7 @@ export default function EventCard({ event, saved, onToggleSave }) {
         <span className="flex items-center gap-2"><Timer className="h-4 w-4 text-orange-500" /> {event.deadline ? `Register by ${formatDate(event.deadline)}` : 'Deadline not listed in demo data'}</span>
       </div>
       <p className="relative mt-5 text-xs leading-5 text-slate-400">{event.note}</p>
-      <div className="relative mt-6 border-t border-slate-100 pt-4">{event.registrationUrl ? <Button as="a" href={event.registrationUrl} target="_blank" rel="noreferrer">Register <ArrowUpRight className="h-4 w-4" /></Button> : <span className="text-xs font-semibold text-slate-400">Official registration link not stored in this prototype.</span>}</div>
+      <div className="relative mt-6 border-t border-slate-100 pt-4">{event.registrationUrl ? <Button as="a" href={event.registrationUrl} target="_blank" rel="noopener noreferrer">Register <ArrowUpRight className="h-4 w-4" /></Button> : <span className="text-xs font-semibold text-slate-400">Official registration link not stored in this prototype.</span>}</div>
     </motion.article>
   )
 }

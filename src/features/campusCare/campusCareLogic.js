@@ -6,8 +6,16 @@ export function validateIssue(input) {
 }
 
 export function createDemoTicket(input, sequence) {
+  let id
+  if (sequence !== undefined && sequence !== null) {
+    id = `FW-${sequence}`
+  } else {
+    const stamp = Date.now().toString().slice(-6)
+    const random = Math.floor(1000 + Math.random() * 9000)
+    id = `FW-${stamp}-${random}`
+  }
   return {
-    id: `FW-${sequence}`,
+    id,
     category: input.category,
     location: input.location.trim(),
     description: String(input.description ?? '').trim(),

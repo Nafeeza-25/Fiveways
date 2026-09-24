@@ -26,7 +26,7 @@ export default function BusPage() {
       <div className="relative z-10 -mt-10 rounded-t-[42px] bg-slate-50">
         <div className="mx-auto max-w-7xl px-5 py-14 sm:px-8 lg:px-10 lg:py-20">
           <Reveal>
-            <Card className="border-blue-100/[.8]0">
+            <Card className="border-blue-100/80">
               <CardContent className="grid gap-4 p-5 sm:p-6 lg:grid-cols-[1fr_auto] lg:items-end">
                 <BusSearch stops={stops} value={stop} onChange={setStop} />
                 <Button variant="secondary" onClick={() => setStop('Cuddalore')}><Navigation2 className="h-4 w-4" /> Try Cuddalore demo</Button>
@@ -38,7 +38,7 @@ export default function BusPage() {
             {!stop ? <EmptyState title="Choose your stop" description="Select a stop to compare upcoming demo buses. Cuddalore is prepared as the flagship competition scenario." action={<Button onClick={() => setStop('Cuddalore')}>Use Cuddalore</Button>} /> : matches.length === 0 ? <EmptyState title="No demo route found" description="This prototype does not have a simulated bus for that stop yet." /> : <>
               {recommended ? <BusRecommendation bus={recommended} reason={reason} nextAvailable={nextAvailable} /> : <EmptyState title="No upcoming demo bus" description="All matching simulated buses have already crossed this stop." />}
               <Reveal><div className="grid gap-3">{ordered.map((bus) => <BusCard key={bus.id} bus={bus} recommended={recommended?.id === bus.id} />)}</div></Reveal>
-              <RouteTimeline bus={recommended} />
+              <RouteTimeline bus={recommended} selectedStop={stop} />
             </>}
           </div>
 

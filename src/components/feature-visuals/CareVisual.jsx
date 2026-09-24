@@ -17,7 +17,7 @@ export default function CareVisual({ compact = false }) {
       {stages.map(({ Icon, label, x }, index) => (
         <motion.div key={label} className="absolute top-[34%] flex flex-col items-center gap-3" style={{ left: x }} animate={reduce ? undefined : { y: [0, -7, 0] }} transition={{ duration: 3, repeat: Infinity, delay: index * .35 }}>
           <div className="grid h-14 w-14 place-items-center rounded-[20px] border border-emerald-200/[.15] bg-white/10 text-emerald-200 shadow-2xl backdrop-blur-xl"><Icon className="h-6 w-6" /></div>
-          {!compact && <span className="text-xs font-black uppercase tracking-[.18em] text-emerald-100/[.8]0">{label}</span>}
+          {!compact && <span className="text-xs font-black uppercase tracking-[.18em] text-emerald-100/80">{label}</span>}
         </motion.div>
       ))}
       <motion.div className="absolute bottom-5 right-5 flex items-center gap-2 rounded-2xl border border-emerald-300/[.15] bg-emerald-400/10 px-3 py-2 text-xs font-extrabold text-emerald-100 backdrop-blur" animate={reduce ? undefined : { scale: [1, 1.04, 1] }} transition={{ duration: 2.4, repeat: Infinity }}><CheckCircle2 className="h-4 w-4" /> Ticket progress visible</motion.div>

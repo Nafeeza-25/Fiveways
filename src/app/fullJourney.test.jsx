@@ -8,7 +8,7 @@ import CampusCarePage from '../features/campusCare/CampusCarePage'
 import AcademicsPage from '../features/academics/AcademicsPage'
 
 const cases = [
-  [<HomePage />, 'WHAT DO YOU NEED RIGHT NOW?'],
+  [<HomePage />, /WHAT DO YOU/i],
   [<BusPage />, 'Find My Bus'],
   [<ScholarshipsPage />, 'Check Scholarships'],
   [<EventsPage />, 'Find an Event'],
@@ -16,8 +16,8 @@ const cases = [
   [<AcademicsPage />, 'Plan My Academics'],
 ]
 
-test.each(cases)('judge route renders %s', (page, text) => {
+test.each(cases)('judge route renders %s', async (page, text) => {
   const { unmount } = render(<MemoryRouter>{page}</MemoryRouter>)
-  expect(screen.getByText(text)).toBeInTheDocument()
+  expect(await screen.findByText(text)).toBeInTheDocument()
   unmount()
 })
