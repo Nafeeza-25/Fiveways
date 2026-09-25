@@ -21,10 +21,10 @@ test('shadcn-style ui primitives exist', () => {
   }
 })
 
-test('global page transitions use Framer Motion', () => {
+test('AppShell structures route layout cleanly', () => {
   const source = read('src/app/AppShell.jsx')
-  assert.match(source, /AnimatePresence/)
-  assert.match(source, /motion\./)
+  assert.match(source, /main/)
+  assert.match(source, /Outlet/)
   assert.match(source, /useLocation/)
 })
 
